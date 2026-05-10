@@ -700,7 +700,12 @@ async function loadTemplate() {
           htmlFile,
           cssFile,
           html,
-          css: grapesCss,
+          css: currentOriginalCss
+            .replace(/\/\* === GRAPESJS MANAGED CSS START === \*\/[\s\S]*?\/\* === GRAPESJS MANAGED CSS END === \*\//g, '')
+            .trim()
+            + '\n\n/* === GRAPESJS MANAGED CSS START === */\n'
+            + grapesCss
+            + '\n/* === GRAPESJS MANAGED CSS END === */\n',
           originalCss: currentOriginalCss,
         }),
       });
