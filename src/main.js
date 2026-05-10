@@ -88,6 +88,7 @@ async function loadTemplate() {
     fromElement: false,
     storageManager: false,
     components: html,
+    style: currentOriginalCss,
 
     canvas: {
       styles: [cssPath],
