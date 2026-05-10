@@ -66,6 +66,48 @@ ${END}
           }
         });
       });
+      server.middlewares.use('/upload-template-asset', (req, res) => {
+        if (req.method !== 'POST') {
+          res.statusCode = 405;
+          res.end('Method not allowed');
+          return;
+        }
+
+        let body = '';
+
+        req.on('data', chunk => {
+          body += chunk;
+        });
+
+        req.on('end', () => {
+          try {
+            const data = JSON.parse(body);
+
+            const folder = data.folder.replace(/^\/+|\/+$/g, '');
+            const filename = path.basename(data.filename);
+            const base64 = data.base64.split(',').pop();
+
+            const assetPath = path.resolve('public', folder, filename);
+
+            fs.writeFileSync(assetPath, Buffer.from(base64, 'base64'));
+
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({
+              ok: true,
+              filename,
+              relativePath: `./${filename}`,
+              publicPath: `/${folder}/${filename}`,
+            }));
+          } catch (error) {
+            res.statusCode = 500;
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({
+              ok: false,
+              error: error.message,
+            }));
+          }
+        });
+      });
     },
   };
 }

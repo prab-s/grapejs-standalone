@@ -52,7 +52,28 @@ async function loadTemplate() {
     return;
   }
 
-  const html = await htmlRes.text();
+  let html = await htmlRes.text();
+
+  html = html.replace(
+    /src="\.\/([^"]+)"/g,
+    `src="/${folder}/$1" data-save-src="./$1"`
+  );
+
+  html = html.replace(
+    /src='\.\/([^']+)'/g,
+    `src='/${folder}/$1' data-save-src='./$1'`
+  );
+
+  html = html.replace(
+    /href="\.\/([^"]+)"/g,
+    `href="/${folder}/$1" data-save-href="./$1"`
+  );
+
+  html = html.replace(
+    /href='\.\/([^']+)'/g,
+    `href='/${folder}/$1' data-save-href='./$1'`
+  );
+
   currentOriginalCss = await cssRes.text();
 
   if (editor) {
@@ -94,8 +115,65 @@ async function loadTemplate() {
   editor.StyleManager.addSector('html-attributes', {
     name: 'HTML Attributes',
     open: true,
-    properties: [],
+    properties: [
+      {
+        name: 'Selected element',
+        property: 'data-gjs-attr-editor-placeholder',
+        type: 'text',
+        defaults: '',
+        full: true,
+      },
+    ],
   });
+
+  function chooseFileAsDataUrl(accept = 'image/*') {
+    return new Promise((resolve) => {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = accept;
+
+      input.addEventListener('change', () => {
+        const file = input.files?.[0];
+
+        if (!file) {
+          resolve(null);
+          return;
+        }
+
+        const reader = new FileReader();
+
+        reader.onload = () => {
+          resolve({
+            file,
+            dataUrl: reader.result,
+          });
+        };
+
+        reader.readAsDataURL(file);
+      });
+
+      input.click();
+    });
+  }
+
+  async function uploadAssetToTemplateFolder(file, dataUrl) {
+    const res = await fetch('/upload-template-asset', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        folder,
+        filename: file.name,
+        base64: dataUrl,
+      }),
+    });
+
+    if (!res.ok) {
+      alert('Asset upload failed');
+      return null;
+    }
+
+    return await res.json();
+  }
 
   function escapeHtml(value) {
     return String(value || '')
@@ -136,6 +214,10 @@ async function loadTemplate() {
       <label>src</label>
       <input data-attr-field="src" value="${escapeHtml(attrs.src || '')}" style="width:100%; margin-bottom:6px;">
 
+      <button type="button" data-attr-upload-src style="width:100%; padding:6px; margin-bottom:8px; cursor:pointer;">
+        Choose Image File
+      </button>
+
       <label>href</label>
       <input data-attr-field="href" value="${escapeHtml(attrs.href || '')}" style="width:100%; margin-bottom:6px;">
 
@@ -162,25 +244,73 @@ async function loadTemplate() {
     if (targetField) targetField.value = attrs.target || '';
 
     builder.querySelector('[data-attr-apply]').addEventListener('click', () => {
+      const liveSelected = editor.getSelected();
+
+      if (!liveSelected) {
+        alert('Select an element first.');
+        return;
+      }
+
       const newAttrs = {};
 
       builder.querySelectorAll('[data-attr-field]').forEach((field) => {
         const name = field.getAttribute('data-attr-field');
         const value = field.value.trim();
 
-        if (value) {
+        if (!value) return;
+
+        if ((name === 'src' || name === 'href') && value.startsWith('./')) {
+          newAttrs[name] = `/${folder}/${value.replace('./', '')}`;
+          newAttrs[`data-save-${name}`] = value;
+        } else {
           newAttrs[name] = value;
         }
       });
 
-      selected.setAttributes({
-        ...selected.getAttributes(),
-        ...newAttrs,
-      });
+      liveSelected.addAttributes(newAttrs);
 
+      editor.select(liveSelected);
       editor.refresh();
       injectHtmlAttributeEditor();
     });
+
+    const uploadSrcButton = builder.querySelector('[data-attr-upload-src]');
+
+    if (uploadSrcButton) {
+      uploadSrcButton.addEventListener('click', async () => {
+        const picked = await chooseFileAsDataUrl('image/*');
+
+        if (!picked) return;
+
+        const uploaded = await uploadAssetToTemplateFolder(picked.file, picked.dataUrl);
+
+        if (!uploaded?.ok) {
+          alert('Image upload failed');
+          return;
+        }
+
+        const srcField = builder.querySelector('[data-attr-field="src"]');
+        if (srcField) {
+          srcField.value = uploaded.relativePath;
+        }
+
+        const liveSelected = editor.getSelected();
+
+        if (liveSelected) {
+          liveSelected.addAttributes({
+            src: uploaded.publicPath,
+            'data-save-src': uploaded.relativePath,
+          });
+
+          editor.select(liveSelected);
+          editor.refresh();
+        }
+
+        editor.refresh();
+
+        alert(`Uploaded and applied: ${uploaded.relativePath}`);
+      });
+    }
   }
 
   editor.on('component:selected', () => {
@@ -189,6 +319,10 @@ async function loadTemplate() {
 
   editor.on('style:target', () => {
     setTimeout(injectHtmlAttributeEditor, 100);
+  });
+
+  editor.on('load', () => {
+    setTimeout(injectHtmlAttributeEditor, 300);
   });
 
   function clampNumber(value, min, max, fallback) {
@@ -402,6 +536,11 @@ async function loadTemplate() {
 
     if (!sector) return;
 
+    const placeholder = sector.querySelector('[data-sm-property="data-gradient-sector-placeholder"]');
+    if (placeholder) {
+      placeholder.style.display = 'none';
+    }
+
     if (sector.querySelector('[data-gradient-builder]')) {
       syncGradientBuilderFromSelected();
       return;
@@ -474,9 +613,6 @@ async function loadTemplate() {
       <label>Generated CSS</label>
       <textarea data-gradient-output readonly style="width:100%; min-height:70px; margin-bottom:8px;"></textarea>
 
-      <label>Applied background-image</label>
-      <textarea data-gradient-css readonly style="width:100%; min-height:70px; margin-bottom:8px;"></textarea>
-
       <button type="button" data-gradient-apply style="width:100%; padding:6px; cursor:pointer;">
         Apply Gradient
       </button>
@@ -500,11 +636,11 @@ async function loadTemplate() {
     open: true,
     properties: [
       {
-        name: 'Background image',
-        property: 'background-image',
+        name: '',
+        property: 'data-gradient-sector-placeholder',
         type: 'text',
-        full: true,
         defaults: '',
+        full: true,
       },
     ],
   });
@@ -530,7 +666,29 @@ async function loadTemplate() {
 
   editor.Commands.add('save-files', {
     async run(editor) {
-      const html = editor.getHtml();
+
+      let html = editor.getHtml();
+
+      html = html.replace(
+        /src="\/([^"]+)"\s+data-save-src="([^"]+)"/g,
+        'src="$2"'
+      );
+
+      html = html.replace(
+        /data-save-src="([^"]+)"\s+src="\/([^"]+)"/g,
+        'src="$1"'
+      );
+
+      html = html.replace(
+        /href="\/([^"]+)"\s+data-save-href="([^"]+)"/g,
+        'href="$2"'
+      );
+
+      html = html.replace(
+        /data-save-href="([^"]+)"\s+href="\/([^"]+)"/g,
+        'href="$1"'
+      );
+
       const grapesCss = editor.getCss();
 
       const res = await fetch('/save-template', {
