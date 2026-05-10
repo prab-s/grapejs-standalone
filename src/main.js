@@ -91,6 +91,106 @@ async function loadTemplate() {
     content: '<div class="pdf-avoid-break">Content here</div>',
   });
 
+  editor.StyleManager.addSector('html-attributes', {
+    name: 'HTML Attributes',
+    open: true,
+    properties: [],
+  });
+
+  function escapeHtml(value) {
+    return String(value || '')
+      .replaceAll('&', '&amp;')
+      .replaceAll('"', '&quot;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;');
+  }
+
+  function findHtmlAttributesSector() {
+    return [...document.querySelectorAll('.gjs-sm-sector')]
+      .find((el) => el.textContent.includes('HTML Attributes'))
+      ?.querySelector('.gjs-sm-properties');
+  }
+
+  function injectHtmlAttributeEditor() {
+    const sector = findHtmlAttributesSector();
+    const selected = editor.getSelected();
+
+    if (!sector || !selected) return;
+
+    const existing = sector.querySelector('[data-html-attribute-editor]');
+    if (existing) existing.remove();
+
+    const attrs = selected.getAttributes();
+    const tagName = selected.get('tagName') || '';
+
+    const builder = document.createElement('div');
+    builder.setAttribute('data-html-attribute-editor', 'true');
+    builder.style.padding = '8px';
+    builder.style.width = '100%';
+    builder.style.boxSizing = 'border-box';
+
+    builder.innerHTML = `
+      <label>Tag</label>
+      <input readonly value="${escapeHtml(tagName)}" style="width:100%; margin-bottom:6px;">
+
+      <label>src</label>
+      <input data-attr-field="src" value="${escapeHtml(attrs.src || '')}" style="width:100%; margin-bottom:6px;">
+
+      <label>href</label>
+      <input data-attr-field="href" value="${escapeHtml(attrs.href || '')}" style="width:100%; margin-bottom:6px;">
+
+      <label>alt</label>
+      <input data-attr-field="alt" value="${escapeHtml(attrs.alt || '')}" style="width:100%; margin-bottom:6px;">
+
+      <label>title</label>
+      <input data-attr-field="title" value="${escapeHtml(attrs.title || '')}" style="width:100%; margin-bottom:6px;">
+
+      <label>target</label>
+      <select data-attr-field="target" style="width:100%; margin-bottom:8px;">
+        <option value="">Same tab</option>
+        <option value="_blank">New tab</option>
+      </select>
+
+      <button type="button" data-attr-apply style="width:100%; padding:6px; cursor:pointer;">
+        Apply HTML Attributes
+      </button>
+    `;
+
+    sector.appendChild(builder);
+
+    const targetField = builder.querySelector('[data-attr-field="target"]');
+    if (targetField) targetField.value = attrs.target || '';
+
+    builder.querySelector('[data-attr-apply]').addEventListener('click', () => {
+      const newAttrs = {};
+
+      builder.querySelectorAll('[data-attr-field]').forEach((field) => {
+        const name = field.getAttribute('data-attr-field');
+        const value = field.value.trim();
+
+        if (value) {
+          newAttrs[name] = value;
+        }
+      });
+
+      selected.setAttributes({
+        ...selected.getAttributes(),
+        ...newAttrs,
+      });
+
+      editor.refresh();
+      injectHtmlAttributeEditor();
+    });
+  }
+
+  editor.on('component:selected', () => {
+    setTimeout(injectHtmlAttributeEditor, 100);
+  });
+
+  editor.on('style:target', () => {
+    setTimeout(injectHtmlAttributeEditor, 100);
+  });
+
   function clampNumber(value, min, max, fallback) {
     const num = Number(value);
     if (Number.isNaN(num)) return fallback;

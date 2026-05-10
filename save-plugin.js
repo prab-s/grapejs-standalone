@@ -28,36 +28,42 @@ export default function savePlugin() {
         });
 
         req.on('end', () => {
-          const data = JSON.parse(body);
+          try {
+            const data = JSON.parse(body);
 
-          const existingCssPath = path.resolve('public/templates/template.css');
-          const existingCss = fs.existsSync(existingCssPath)
-            ? fs.readFileSync(existingCssPath, 'utf8')
-            : data.originalCss || '';
+            const folder = data.folder.replace(/^\/+|\/+$/g, '');
+            const htmlFile = data.htmlFile;
+            const cssFile = data.cssFile;
 
-          const preservedCss = removeManagedCss(existingCss);
+            const existingHtmlPath = path.resolve('public', folder, htmlFile);
+            const existingCssPath = path.resolve('public', folder, cssFile);
 
-          const finalCss = `${preservedCss}
+            const existingCss = fs.existsSync(existingCssPath)
+              ? fs.readFileSync(existingCssPath, 'utf8')
+              : data.originalCss || '';
+
+            const preservedCss = removeManagedCss(existingCss);
+
+            const finalCss = `${preservedCss}
 
 ${START}
 ${data.css}
 ${END}
 `;
 
-          fs.writeFileSync(
-            path.resolve('public/templates/template.html'),
-            data.html,
-            'utf8'
-          );
+            fs.writeFileSync(existingHtmlPath, data.html, 'utf8');
+            fs.writeFileSync(existingCssPath, finalCss, 'utf8');
 
-          fs.writeFileSync(
-            existingCssPath,
-            finalCss,
-            'utf8'
-          );
-
-          res.setHeader('Content-Type', 'application/json');
-          res.end(JSON.stringify({ ok: true }));
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ ok: true }));
+          } catch (error) {
+            res.statusCode = 500;
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({
+              ok: false,
+              error: error.message,
+            }));
+          }
         });
       });
     },
