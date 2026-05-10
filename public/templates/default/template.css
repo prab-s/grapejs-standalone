@@ -67,9 +67,9 @@ body.product-type-template {
 /* Page 1: cover */
 .cover-page {
   background:
-    radial-gradient(circle at 48% 38%, rgba(255,255,255,0.16) 0 0.4mm, transparent 0.6mm),
-    radial-gradient(circle at 50% 39%, transparent 0 27mm, rgba(255,255,255,0.12) 27.2mm 27.6mm, transparent 27.8mm),
-    radial-gradient(circle at 50% 39%, transparent 0 45mm, rgba(255,255,255,0.10) 45.2mm 45.6mm, transparent 45.8mm),
+    radial-gradient(circle at 48% 38%, rgba(255, 255, 255, 0.16) 0 0.4mm, transparent 0.6mm),
+    radial-gradient(circle at 50% 39%, transparent 0 27mm, rgba(255, 255, 255, 0.12) 27.2mm 27.6mm, transparent 27.8mm),
+    radial-gradient(circle at 50% 39%, transparent 0 45mm, rgba(255, 255, 255, 0.10) 45.2mm 45.6mm, transparent 45.8mm),
     linear-gradient(180deg, #000 0%, #08090d 76%, #b60e20 76%, #e02532 100%);
   color: #fff;
   padding: 15mm 10mm 0;
@@ -186,7 +186,49 @@ body.product-type-template {
   font-weight: 700;
 }
 
-/* Page 2: contact spread */
+/* Page 2: full-page company image/artwork */
+.company-image-page {
+  padding: 0;
+  background: #0b3a73;
+}
+
+.company-image-page__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 297mm;
+  object-fit: cover;
+}
+
+/* Page 3: contact details */
+.contact-page {
+  padding: 0 14mm 12mm;
+  background: #fff;
+}
+
+.contact-page__header {
+  height: 38mm;
+  margin: 0 -14mm 10mm;
+  padding: 9mm 14mm;
+  color: #fff;
+  background:
+    linear-gradient(rgba(0, 41, 92, 0.92), rgba(0, 41, 92, 0.92)),
+    linear-gradient(90deg, #002a63, #074989);
+}
+
+.contact-page__logo {
+  font-size: 4mm;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+
+.contact-page__header h1 {
+  margin: 2mm 0 0;
+  font-size: 8mm;
+  line-height: 1;
+}
+
+/* Legacy Page 2 contact spread selectors retained for GrapeJS compatibility */
 .contact-spread {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -196,7 +238,7 @@ body.product-type-template {
 .contact-spread__image-panel {
   position: relative;
   background:
-    linear-gradient(rgba(0,55,112,0.83), rgba(0,55,112,0.83)),
+    linear-gradient(rgba(0, 55, 112, 0.83), rgba(0, 55, 112, 0.83)),
     linear-gradient(135deg, #0b3a73, #061f43);
 }
 
@@ -218,7 +260,7 @@ body.product-type-template {
   padding: 7mm 10mm;
   color: #fff;
   background:
-    linear-gradient(rgba(0,41,92,0.92), rgba(0,41,92,0.92)),
+    linear-gradient(rgba(0, 41, 92, 0.92), rgba(0, 41, 92, 0.92)),
     linear-gradient(90deg, #002a63, #074989);
 }
 
@@ -347,7 +389,7 @@ body.product-type-template {
   background: #edf1f7;
 }
 
-/* Page 3: dynamic contents */
+/* Page 4: dynamic contents */
 .contents-page {
   padding: 0 10mm 8mm;
   background: #fff;
@@ -362,7 +404,7 @@ body.product-type-template {
   justify-content: space-between;
   color: #fff;
   background:
-    linear-gradient(rgba(0,42,96,0.92), rgba(0,42,96,0.92)),
+    linear-gradient(rgba(0, 42, 96, 0.92), rgba(0, 42, 96, 0.92)),
     linear-gradient(90deg, #002a63, #064b8f);
 }
 
@@ -505,13 +547,2628 @@ body.product-type-template {
 }
 
 /* === GRAPESJS MANAGED CSS START === */
-* { box-sizing: border-box; } body {margin: 0;}.gjs-row{display:table;padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;width:100%;}.gjs-cell{width:8%;display:table-cell;height:75px;}.page{background-color:#edf1f6;}#iezi6{padding:10px;}#i67gp{color:black;}@media (max-width: 768px){.gjs-cell{width:100%;display:block;}}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.gjs-row {
+  display: table;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  width: 100%;
+}
+
+.gjs-cell {
+  width: 8%;
+  display: table-cell;
+  height: 75px;
+}
+
+.page {
+  background-color: #edf1f6;
+}
+
+#iezi6 {
+  padding: 10px;
+}
+
+#i67gp {
+  color: black;
+}
+
+@media (max-width: 768px) {
+  .gjs-cell {
+    width: 100%;
+    display: block;
+  }
+}
+
 /* === GRAPESJS MANAGED CSS END === */
 
 /* === GRAPESJS MANAGED CSS START === */
-* { box-sizing: border-box; } body {margin: 0;}
+:root {
+  --page-bg: #eef2f7;
+  --ink: #1f2937;
+  --muted: #526074;
+  --panel: rgba(255, 255, 255, 0.9);
+  --line: rgba(82, 96, 116, 0.22);
+  --accent: #21406f;
+  --vent-red: #cc1024;
+  --vent-dark: #050608;
+  --vent-blue: #003b78;
+  --vent-yellow: #f6c400;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--page-bg);
+  color: var(--ink);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body.product-type-template {
+  background: var(--page-bg);
+}
+
+.catalogue-document {
+  width: 100%;
+}
+
+.pdf-page {
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+  background: #fff;
+  page-break-after: always;
+  break-after: page;
+}
+
+.pdf-page--portrait {
+  width: 210mm;
+  min-height: 297mm;
+}
+
+.pdf-page--landscape {
+  width: 297mm;
+  min-height: 210mm;
+}
+
+.pdf-page-break {
+  height: 0;
+  overflow: hidden;
+  color: transparent;
+  page-break-after: always;
+  break-after: page;
+}
+
+/* Page 1: cover */
+.cover-page {
+  background:
+    radial-gradient(
+      circle at 48% 38%,
+      rgba(255, 255, 255, 0.16) 0 0.4mm,
+      transparent 0.6mm
+    ),
+    radial-gradient(
+      circle at 50% 39%,
+      transparent 0 27mm,
+      rgba(255, 255, 255, 0.12) 27.2mm 27.6mm,
+      transparent 27.8mm
+    ),
+    radial-gradient(
+      circle at 50% 39%,
+      transparent 0 45mm,
+      rgba(255, 255, 255, 0.1) 45.2mm 45.6mm,
+      transparent 45.8mm
+    ),
+    linear-gradient(180deg, #000 0%, #08090d 76%, #b60e20 76%, #e02532 100%);
+  color: #fff;
+  padding: 15mm 10mm 0;
+}
+
+.cover-page__artwork {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.3;
+}
+
+.cover-page__nz {
+  position: absolute;
+  top: 15mm;
+  right: 20mm;
+  z-index: 2;
+  font-size: 3.1mm;
+  line-height: 1.25;
+  border-left: 0.7mm solid var(--vent-red);
+  padding-left: 2mm;
+}
+
+.cover-page__brand-block {
+  position: absolute;
+  z-index: 2;
+  left: 19mm;
+  top: 105mm;
+}
+
+.cover-page__brand {
+  font-size: 14mm;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 0.9;
+}
+
+.cover-page__tagline {
+  margin-top: 2mm;
+  font-size: 3mm;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.cover-page__catalogue-block {
+  position: absolute;
+  left: 10mm;
+  bottom: 39mm;
+  z-index: 2;
+  padding-top: 4mm;
+  border-top: 0.8mm solid var(--vent-red);
+}
+
+.cover-page__label {
+  font-size: 4.2mm;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.cover-page__years {
+  margin-top: 2mm;
+  font-size: 2.8mm;
+  color: #ff4f5c;
+  font-weight: 700;
+}
+
+.cover-page__feature-strip {
+  position: absolute;
+  left: 42mm;
+  right: 8mm;
+  bottom: 35mm;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 2mm;
+}
+
+.cover-feature {
+  text-align: center;
+  font-size: 1.95mm;
+  line-height: 1.15;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.cover-feature__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 15mm;
+  height: 15mm;
+  margin: 0 auto 1.8mm;
+  border: 0.5mm solid rgba(210, 20, 34, 0.9);
+  border-radius: 50%;
+  background: radial-gradient(circle, #28303a 0%, #101318 70%);
+  font-size: 5mm;
+}
+
+.cover-page__footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  height: 15mm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14mm;
+  color: #fff;
+  font-size: 3mm;
+  font-weight: 700;
+}
+
+/* Page 2: full-page company image/artwork */
+.company-image-page {
+  padding: 0;
+  background: #0b3a73;
+}
+
+.company-image-page__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 297mm;
+  object-fit: cover;
+}
+
+/* Page 3: contact details */
+.contact-page {
+  padding: 0 14mm 12mm;
+  background: #fff;
+}
+
+.contact-page__header {
+  height: 38mm;
+  margin: 0 -14mm 10mm;
+  padding: 9mm 14mm;
+  color: #fff;
+  background:
+    linear-gradient(rgba(0, 41, 92, 0.92), rgba(0, 41, 92, 0.92)),
+    linear-gradient(90deg, #002a63, #074989);
+}
+
+.contact-page__logo {
+  font-size: 4mm;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+
+.contact-page__header h1 {
+  margin: 2mm 0 0;
+  font-size: 8mm;
+  line-height: 1;
+}
+
+/* Legacy Page 2 contact spread selectors retained for GrapeJS compatibility */
+.contact-spread {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #fff;
+}
+
+.contact-spread__image-panel {
+  position: relative;
+  background:
+    linear-gradient(rgba(0, 55, 112, 0.83), rgba(0, 55, 112, 0.83)),
+    linear-gradient(135deg, #0b3a73, #061f43);
+}
+
+.contact-spread__bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.22;
+}
+
+.contact-spread__content-panel {
+  padding: 0 10mm 7mm;
+  background: #fff;
+}
+
+.contact-spread__header {
+  height: 29mm;
+  margin: 0 -10mm 7mm;
+  padding: 7mm 10mm;
+  color: #fff;
+  background:
+    linear-gradient(rgba(0, 41, 92, 0.92), rgba(0, 41, 92, 0.92)),
+    linear-gradient(90deg, #002a63, #074989);
+}
+
+.contact-spread__logo {
+  font-size: 4mm;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+
+.contact-spread__header h1 {
+  margin: 1mm 0 0;
+  font-size: 7mm;
+  line-height: 1;
+}
+
+.contact-phone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5mm;
+  min-height: 20mm;
+  color: #1d3d7a;
+  font-size: 5mm;
+  letter-spacing: 0.05em;
+}
+
+.contact-phone__icon,
+.contact-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 13mm;
+  height: 13mm;
+  border-radius: 50%;
+  background: #004a9f;
+  color: #fff;
+  font-size: 6mm;
+}
+
+.contact-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4mm;
+  padding: 5mm;
+  margin-bottom: 7mm;
+  border-radius: 4mm;
+  background: #eaf2ff;
+}
+
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5mm;
+  text-align: center;
+  font-size: 2.7mm;
+  color: #172b4d;
+}
+
+.contact-card strong {
+  font-size: 3mm;
+}
+
+.locations-panel {
+  padding: 5mm;
+  border-radius: 4mm;
+  background: #eef4ff;
+}
+
+.locations-panel h2 {
+  margin: 0 0 5mm;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #253d6b;
+  font-size: 4mm;
+}
+
+.locations-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10mm;
+}
+
+.location-block h3 {
+  margin: 0 0 2mm;
+  font-size: 3.6mm;
+  color: #253d6b;
+}
+
+.location-block p {
+  margin: 0 0 1.5mm;
+  font-size: 2.8mm;
+  line-height: 1.25;
+}
+
+.location-image-row,
+.map-row {
+  display: grid;
+  gap: 1mm;
+  margin-top: 5mm;
+}
+
+.location-image-row {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.map-row {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.location-image-placeholder,
+.map-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28mm;
+  background: #d7e2f2;
+  color: #5f6d80;
+  font-size: 3mm;
+  border: 0.25mm solid rgba(30, 60, 100, 0.18);
+}
+
+.map-placeholder {
+  min-height: 43mm;
+  background: #edf1f7;
+}
+
+/* Page 4: dynamic contents */
+.contents-page {
+  padding: 0 10mm 8mm;
+  background: #fff;
+}
+
+.contents-page__header {
+  height: 29mm;
+  margin: 0 -10mm 8mm;
+  padding: 6mm 12mm;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+  background:
+    linear-gradient(rgba(0, 42, 96, 0.92), rgba(0, 42, 96, 0.92)),
+    linear-gradient(90deg, #002a63, #064b8f);
+}
+
+.contents-page__section-label {
+  display: inline-block;
+  padding: 1mm 2mm;
+  margin-bottom: 1mm;
+  background: var(--vent-yellow);
+  color: #fff;
+  font-size: 2.8mm;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.contents-page__header h1 {
+  margin: 0;
+  font-size: 8mm;
+  line-height: 1;
+}
+
+.contents-page__icon {
+  font-size: 12mm;
+}
+
+.series-legend-panel,
+.contents-panel {
+  margin-bottom: 6mm;
+}
+
+.series-legend-panel h2,
+.contents-panel h2 {
+  margin: 0 0 4mm;
+  font-size: 5mm;
+  color: var(--accent);
+}
+
+.series-legend-panel__content,
+.contents-panel__content {
+  font-size: 3.5mm;
+  line-height: 1.35;
+}
+
+.series-legend {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(60mm, 1fr));
+  gap: 3mm 4mm;
+  padding: 0;
+  margin: 0;
+}
+
+.series-legend__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 3mm;
+  min-height: 11mm;
+}
+
+.series-legend__swatch {
+  width: 6mm;
+  height: 6mm;
+  border-radius: 50%;
+  flex: 0 0 auto;
+  margin-top: 0.8mm;
+  border: 0.25mm solid rgba(31, 41, 55, 0.18);
+}
+
+.product-type-contents {
+  display: flex;
+  flex-direction: column;
+  gap: 5mm;
+}
+
+.series-group {
+  border: 0.3mm solid var(--line);
+  border-left: 4.5mm solid var(--series-accent, var(--accent));
+  border-radius: 3.5mm;
+  padding: 4mm;
+  page-break-inside: avoid;
+  break-inside: avoid;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.series-group__header {
+  display: flex;
+  justify-content: space-between;
+  gap: 4mm;
+  align-items: baseline;
+  margin-bottom: 3.5mm;
+}
+
+.series-group__title {
+  margin: 0;
+  font-size: 5mm;
+}
+
+.series-group__meta {
+  font-size: 3.2mm;
+  color: var(--muted);
+}
+
+.series-group__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(35mm, 1fr));
+  gap: 3mm;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8mm;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.product-card img,
+.product-card__image,
+.product-card__placeholder {
+  width: 100%;
+  height: 28mm;
+  object-fit: contain;
+  border: 0.25mm solid rgba(82, 96, 116, 0.24);
+  border-radius: 2.2mm;
+  background: rgba(255, 255, 255, 0.96);
+  padding: 2mm;
+}
+
+.product-card__placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 3.2mm;
+}
+
+.product-card__name {
+  font-size: 3.4mm;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* === GRAPESJS MANAGED CSS START === */
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+:root {
+  --page-bg: #eef2f7;
+  --ink: #1f2937;
+  --muted: #526074;
+  --panel: rgba(255, 255, 255, 0.9);
+  --line: rgba(82, 96, 116, 0.22);
+  --accent: #21406f;
+  --vent-red: #cc1024;
+  --vent-dark: #050608;
+  --vent-blue: #003b78;
+  --vent-yellow: #f6c400;
+}
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  color: var(--ink);
+  font-family: Arial, Helvetica, sans-serif;
+}
+.catalogue-document {
+  width: 100%;
+}
+.pdf-page {
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  margin-top: 0px;
+  margin-right: auto;
+  margin-bottom: 0px;
+  margin-left: auto;
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(255, 255, 255);
+  break-after: page;
+}
+.pdf-page--portrait {
+  width: 210mm;
+  min-height: 297mm;
+}
+.pdf-page--landscape {
+  width: 297mm;
+  min-height: 210mm;
+}
+.pdf-page-break {
+  height: 0px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  color: transparent;
+  break-after: page;
+}
+.cover-page {
+  background-image:
+    radial-gradient(
+      circle at 48% 38%,
+      rgba(255, 255, 255, 0.16) 0px,
+      rgba(255, 255, 255, 0.16) 0.4mm,
+      transparent 0.6mm
+    ),
+    radial-gradient(
+      circle at 50% 39%,
+      transparent 0px,
+      transparent 27mm,
+      rgba(255, 255, 255, 0.12) 27.2mm,
+      rgba(255, 255, 255, 0.12) 27.6mm,
+      transparent 27.8mm
+    ),
+    radial-gradient(
+      circle at 50% 39%,
+      transparent 0px,
+      transparent 45mm,
+      rgba(255, 255, 255, 0.1) 45.2mm,
+      rgba(255, 255, 255, 0.1) 45.6mm,
+      transparent 45.8mm
+    ),
+    linear-gradient(
+      rgb(0, 0, 0) 0%,
+      rgb(8, 9, 13) 76%,
+      rgb(182, 14, 32) 76%,
+      rgb(224, 37, 50) 100%
+    );
+  background-position-x: initial, initial, initial, initial;
+  background-position-y: initial, initial, initial, initial;
+  background-size: initial, initial, initial, initial;
+  background-repeat: initial, initial, initial, initial;
+  background-attachment: initial, initial, initial, initial;
+  background-origin: initial, initial, initial, initial;
+  background-clip: initial, initial, initial, initial;
+  background-color: initial;
+  color: rgb(255, 255, 255);
+  padding-top: 15mm;
+  padding-right: 10mm;
+  padding-bottom: 0px;
+  padding-left: 10mm;
+}
+.cover-page__artwork {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.3;
+}
+.cover-page__nz {
+  position: absolute;
+  top: 15mm;
+  right: 20mm;
+  z-index: 2;
+  font-size: 3.1mm;
+  line-height: 1.25;
+  padding-left: 2mm;
+}
+.cover-page__brand-block {
+  position: absolute;
+  z-index: 2;
+  left: 19mm;
+  top: 105mm;
+}
+.cover-page__brand {
+  font-size: 14mm;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 0.9;
+}
+.cover-page__tagline {
+  margin-top: 2mm;
+  font-size: 3mm;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.cover-page__catalogue-block {
+  position: absolute;
+  left: 10mm;
+  bottom: 39mm;
+  z-index: 2;
+  padding-top: 4mm;
+}
+.cover-page__label {
+  font-size: 4.2mm;
+  font-weight: 800;
+  line-height: 1.1;
+}
+.cover-page__years {
+  margin-top: 2mm;
+  font-size: 2.8mm;
+  color: rgb(255, 79, 92);
+  font-weight: 700;
+}
+.cover-page__feature-strip {
+  position: absolute;
+  left: 42mm;
+  right: 8mm;
+  bottom: 35mm;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  row-gap: 2mm;
+  column-gap: 2mm;
+}
+.cover-feature {
+  text-align: center;
+  font-size: 1.95mm;
+  line-height: 1.15;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.cover-feature__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 15mm;
+  height: 15mm;
+  margin-top: 0px;
+  margin-right: auto;
+  margin-bottom: 1.8mm;
+  margin-left: auto;
+  border-top-width: 0.5mm;
+  border-right-width: 0.5mm;
+  border-bottom-width: 0.5mm;
+  border-left-width: 0.5mm;
+  border-top-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-top-color: rgba(210, 20, 34, 0.9);
+  border-right-color: rgba(210, 20, 34, 0.9);
+  border-bottom-color: rgba(210, 20, 34, 0.9);
+  border-left-color: rgba(210, 20, 34, 0.9);
+  border-image-source: initial;
+  border-image-slice: initial;
+  border-image-width: initial;
+  border-image-outset: initial;
+  border-image-repeat: initial;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+  border-bottom-left-radius: 50%;
+  background-image: radial-gradient(
+    circle,
+    rgb(40, 48, 58) 0%,
+    rgb(16, 19, 24) 70%
+  );
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: initial;
+  font-size: 5mm;
+}
+.cover-page__footer {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 2;
+  height: 15mm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  row-gap: 14mm;
+  column-gap: 14mm;
+  color: rgb(255, 255, 255);
+  font-size: 3mm;
+  font-weight: 700;
+}
+.company-image-page {
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(11, 58, 115);
+}
+.company-image-page__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 297mm;
+  object-fit: cover;
+}
+.contact-page {
+  padding-top: 0px;
+  padding-right: 14mm;
+  padding-bottom: 12mm;
+  padding-left: 14mm;
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(255, 255, 255);
+}
+.contact-page__header {
+  height: 38mm;
+  margin-top: 0px;
+  margin-right: -14mm;
+  margin-bottom: 10mm;
+  margin-left: -14mm;
+  padding-top: 9mm;
+  padding-right: 14mm;
+  padding-bottom: 9mm;
+  padding-left: 14mm;
+  color: rgb(255, 255, 255);
+  background-image:
+    linear-gradient(rgba(0, 41, 92, 0.92), rgba(0, 41, 92, 0.92)),
+    linear-gradient(90deg, rgb(0, 42, 99), rgb(7, 73, 137));
+  background-position-x: initial, initial;
+  background-position-y: initial, initial;
+  background-size: initial, initial;
+  background-repeat: initial, initial;
+  background-attachment: initial, initial;
+  background-origin: initial, initial;
+  background-clip: initial, initial;
+  background-color: initial;
+}
+.contact-page__logo {
+  font-size: 4mm;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+.contact-page__header h1 {
+  margin-top: 2mm;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  font-size: 8mm;
+  line-height: 1;
+}
+.contact-spread__header h1 {
+  margin-top: 1mm;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  font-size: 7mm;
+  line-height: 1;
+}
+.contact-phone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  row-gap: 5mm;
+  column-gap: 5mm;
+  min-height: 20mm;
+  color: rgb(29, 61, 122);
+  font-size: 5mm;
+  letter-spacing: 0.05em;
+}
+.contact-phone__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 13mm;
+  height: 13mm;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+  border-bottom-left-radius: 50%;
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(0, 74, 159);
+  color: rgb(255, 255, 255);
+  font-size: 6mm;
+}
+.contact-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 13mm;
+  height: 13mm;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+  border-bottom-left-radius: 50%;
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(0, 74, 159);
+  color: rgb(255, 255, 255);
+  font-size: 6mm;
+}
+.contact-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 4mm;
+  column-gap: 4mm;
+  padding-top: 5mm;
+  padding-right: 5mm;
+  padding-bottom: 5mm;
+  padding-left: 5mm;
+  margin-bottom: 7mm;
+  border-top-left-radius: 4mm;
+  border-top-right-radius: 4mm;
+  border-bottom-right-radius: 4mm;
+  border-bottom-left-radius: 4mm;
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(234, 242, 255);
+}
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 1.5mm;
+  column-gap: 1.5mm;
+  text-align: center;
+  font-size: 2.7mm;
+  color: rgb(23, 43, 77);
+}
+.contact-card strong {
+  font-size: 3mm;
+}
+.locations-panel {
+  padding-top: 5mm;
+  padding-right: 5mm;
+  padding-bottom: 5mm;
+  padding-left: 5mm;
+  border-top-left-radius: 4mm;
+  border-top-right-radius: 4mm;
+  border-bottom-right-radius: 4mm;
+  border-bottom-left-radius: 4mm;
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(238, 244, 255);
+}
+.locations-panel h2 {
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 5mm;
+  margin-left: 0px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgb(37, 61, 107);
+  font-size: 4mm;
+}
+.locations-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 10mm;
+  column-gap: 10mm;
+}
+.location-block h3 {
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 2mm;
+  margin-left: 0px;
+  font-size: 3.6mm;
+  color: rgb(37, 61, 107);
+}
+.location-block p {
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 1.5mm;
+  margin-left: 0px;
+  font-size: 2.8mm;
+  line-height: 1.25;
+}
+.location-image-row {
+  display: grid;
+  row-gap: 1mm;
+  column-gap: 1mm;
+  margin-top: 5mm;
+}
+.map-row {
+  display: grid;
+  row-gap: 1mm;
+  column-gap: 1mm;
+  margin-top: 5mm;
+}
+.location-image-row {
+  grid-template-columns: repeat(3, 1fr);
+}
+.map-row {
+  grid-template-columns: repeat(2, 1fr);
+}
+.location-image-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28mm;
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(215, 226, 242);
+  color: rgb(95, 109, 128);
+  font-size: 3mm;
+  border-top-width: 0.25mm;
+  border-right-width: 0.25mm;
+  border-bottom-width: 0.25mm;
+  border-left-width: 0.25mm;
+  border-top-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-top-color: rgba(30, 60, 100, 0.18);
+  border-right-color: rgba(30, 60, 100, 0.18);
+  border-bottom-color: rgba(30, 60, 100, 0.18);
+  border-left-color: rgba(30, 60, 100, 0.18);
+  border-image-source: initial;
+  border-image-slice: initial;
+  border-image-width: initial;
+  border-image-outset: initial;
+  border-image-repeat: initial;
+}
+.map-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28mm;
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(215, 226, 242);
+  color: rgb(95, 109, 128);
+  font-size: 3mm;
+  border-top-width: 0.25mm;
+  border-right-width: 0.25mm;
+  border-bottom-width: 0.25mm;
+  border-left-width: 0.25mm;
+  border-top-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-top-color: rgba(30, 60, 100, 0.18);
+  border-right-color: rgba(30, 60, 100, 0.18);
+  border-bottom-color: rgba(30, 60, 100, 0.18);
+  border-left-color: rgba(30, 60, 100, 0.18);
+  border-image-source: initial;
+  border-image-slice: initial;
+  border-image-width: initial;
+  border-image-outset: initial;
+  border-image-repeat: initial;
+}
+.map-placeholder {
+  min-height: 43mm;
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(237, 241, 247);
+}
+.contents-page {
+  padding-top: 0px;
+  padding-right: 10mm;
+  padding-bottom: 8mm;
+  padding-left: 10mm;
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(255, 255, 255);
+}
+.contents-page__header {
+  height: 29mm;
+  margin-top: 0px;
+  margin-right: -10mm;
+  margin-bottom: 8mm;
+  margin-left: -10mm;
+  padding-top: 6mm;
+  padding-right: 12mm;
+  padding-bottom: 6mm;
+  padding-left: 12mm;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: rgb(255, 255, 255);
+  background-image:
+    linear-gradient(rgba(0, 42, 96, 0.92), rgba(0, 42, 96, 0.92)),
+    linear-gradient(90deg, rgb(0, 42, 99), rgb(6, 75, 143));
+  background-position-x: initial, initial;
+  background-position-y: initial, initial;
+  background-size: initial, initial;
+  background-repeat: initial, initial;
+  background-attachment: initial, initial;
+  background-origin: initial, initial;
+  background-clip: initial, initial;
+  background-color: initial;
+}
+.contents-page__section-label {
+  display: inline-block;
+  padding-top: 1mm;
+  padding-right: 2mm;
+  padding-bottom: 1mm;
+  padding-left: 2mm;
+  margin-bottom: 1mm;
+  color: rgb(255, 255, 255);
+  font-size: 2.8mm;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.contents-page__header h1 {
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  font-size: 8mm;
+  line-height: 1;
+}
+.contents-page__icon {
+  font-size: 12mm;
+}
+.series-legend-panel {
+  margin-bottom: 6mm;
+}
+.contents-panel {
+  margin-bottom: 6mm;
+}
+.series-legend-panel h2,
+.contents-panel h2 {
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 4mm;
+  margin-left: 0px;
+  font-size: 5mm;
+  color: var(--accent);
+}
+.series-legend-panel__content {
+  font-size: 3.5mm;
+  line-height: 1.35;
+}
+.contents-panel__content {
+  font-size: 3.5mm;
+  line-height: 1.35;
+}
+.product-type-contents {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5mm;
+  column-gap: 5mm;
+}
+.product-card__placeholder,
+.product-card img {
+  width: 100%;
+  height: 28mm;
+  object-fit: contain;
+  border-top-width: 0.25mm;
+  border-right-width: 0.25mm;
+  border-bottom-width: 0.25mm;
+  border-left-width: 0.25mm;
+  border-top-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-top-color: rgba(82, 96, 116, 0.24);
+  border-right-color: rgba(82, 96, 116, 0.24);
+  border-bottom-color: rgba(82, 96, 116, 0.24);
+  border-left-color: rgba(82, 96, 116, 0.24);
+  border-image-source: initial;
+  border-image-slice: initial;
+  border-image-width: initial;
+  border-image-outset: initial;
+  border-image-repeat: initial;
+  border-top-left-radius: 2.2mm;
+  border-top-right-radius: 2.2mm;
+  border-bottom-right-radius: 2.2mm;
+  border-bottom-left-radius: 2.2mm;
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgba(255, 255, 255, 0.96);
+  padding-top: 2mm;
+  padding-right: 2mm;
+  padding-bottom: 2mm;
+  padding-left: 2mm;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+}
+@page {
+  size: a4;
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+}
+/* === GRAPESJS MANAGED CSS END === */
+
 /* === GRAPESJS MANAGED CSS END === */
 
 /* === GRAPESJS MANAGED CSS START === */
-* { box-sizing: border-box; } body {margin: 0;}
+:root {
+  --page-bg: #eef2f7;
+  --ink: #1f2937;
+  --muted: #526074;
+  --panel: rgba(255, 255, 255, 0.9);
+  --line: rgba(82, 96, 116, 0.22);
+  --accent: #21406f;
+  --vent-red: #cc1024;
+  --vent-dark: #050608;
+  --vent-blue: #003b78;
+  --vent-yellow: #f6c400;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--page-bg);
+  color: var(--ink);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body.product-type-template {
+  background: var(--page-bg);
+}
+
+.catalogue-document {
+  width: 100%;
+}
+
+.pdf-page {
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+  background: #fff;
+  page-break-after: always;
+  break-after: page;
+}
+
+.pdf-page--portrait {
+  width: 210mm;
+  min-height: 297mm;
+}
+
+.pdf-page--landscape {
+  width: 297mm;
+  min-height: 210mm;
+}
+
+.pdf-page-break {
+  height: 0;
+  overflow: hidden;
+  color: transparent;
+  page-break-after: always;
+  break-after: page;
+}
+
+/* Page 1: cover */
+.cover-page {
+  background:
+    radial-gradient(
+      circle at 48% 38%,
+      rgba(255, 255, 255, 0.16) 0 0.4mm,
+      transparent 0.6mm
+    ),
+    radial-gradient(
+      circle at 50% 39%,
+      transparent 0 27mm,
+      rgba(255, 255, 255, 0.12) 27.2mm 27.6mm,
+      transparent 27.8mm
+    ),
+    radial-gradient(
+      circle at 50% 39%,
+      transparent 0 45mm,
+      rgba(255, 255, 255, 0.1) 45.2mm 45.6mm,
+      transparent 45.8mm
+    ),
+    linear-gradient(180deg, #000 0%, #08090d 76%, #b60e20 76%, #e02532 100%);
+  color: #fff;
+  padding: 15mm 10mm 0;
+}
+
+.cover-page__artwork {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.3;
+}
+
+.cover-page__nz {
+  position: absolute;
+  top: 15mm;
+  right: 20mm;
+  z-index: 2;
+  font-size: 3.1mm;
+  line-height: 1.25;
+  border-left: 0.7mm solid var(--vent-red);
+  padding-left: 2mm;
+}
+
+.cover-page__brand-block {
+  position: absolute;
+  z-index: 2;
+  left: 19mm;
+  top: 105mm;
+}
+
+.cover-page__brand {
+  font-size: 14mm;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 0.9;
+}
+
+.cover-page__tagline {
+  margin-top: 2mm;
+  font-size: 3mm;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.cover-page__catalogue-block {
+  position: absolute;
+  left: 10mm;
+  bottom: 39mm;
+  z-index: 2;
+  padding-top: 4mm;
+  border-top: 0.8mm solid var(--vent-red);
+}
+
+.cover-page__label {
+  font-size: 4.2mm;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.cover-page__years {
+  margin-top: 2mm;
+  font-size: 2.8mm;
+  color: #ff4f5c;
+  font-weight: 700;
+}
+
+.cover-page__feature-strip {
+  position: absolute;
+  left: 42mm;
+  right: 8mm;
+  bottom: 35mm;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 2mm;
+}
+
+.cover-feature {
+  text-align: center;
+  font-size: 1.95mm;
+  line-height: 1.15;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.cover-feature__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 15mm;
+  height: 15mm;
+  margin: 0 auto 1.8mm;
+  border: 0.5mm solid rgba(210, 20, 34, 0.9);
+  border-radius: 50%;
+  background: radial-gradient(circle, #28303a 0%, #101318 70%);
+  font-size: 5mm;
+}
+
+.cover-page__footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  height: 15mm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14mm;
+  color: #fff;
+  font-size: 3mm;
+  font-weight: 700;
+}
+
+/* Page 2: full-page company image/artwork */
+.company-image-page {
+  padding: 0;
+  background: #0b3a73;
+}
+
+.company-image-page__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 297mm;
+  object-fit: cover;
+}
+
+/* Page 3: contact details */
+.contact-page {
+  padding: 0 14mm 12mm;
+  background: #fff;
+}
+
+.contact-page__header {
+  height: 38mm;
+  margin: 0 -14mm 10mm;
+  padding: 9mm 14mm;
+  color: #fff;
+  background:
+    linear-gradient(rgba(0, 41, 92, 0.92), rgba(0, 41, 92, 0.92)),
+    linear-gradient(90deg, #002a63, #074989);
+}
+
+.contact-page__logo {
+  font-size: 4mm;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+
+.contact-page__header h1 {
+  margin: 2mm 0 0;
+  font-size: 8mm;
+  line-height: 1;
+}
+
+/* Legacy Page 2 contact spread selectors retained for GrapeJS compatibility */
+.contact-spread {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #fff;
+}
+
+.contact-spread__image-panel {
+  position: relative;
+  background:
+    linear-gradient(rgba(0, 55, 112, 0.83), rgba(0, 55, 112, 0.83)),
+    linear-gradient(135deg, #0b3a73, #061f43);
+}
+
+.contact-spread__bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.22;
+}
+
+.contact-spread__content-panel {
+  padding: 0 10mm 7mm;
+  background: #fff;
+}
+
+.contact-spread__header {
+  height: 29mm;
+  margin: 0 -10mm 7mm;
+  padding: 7mm 10mm;
+  color: #fff;
+  background:
+    linear-gradient(rgba(0, 41, 92, 0.92), rgba(0, 41, 92, 0.92)),
+    linear-gradient(90deg, #002a63, #074989);
+}
+
+.contact-spread__logo {
+  font-size: 4mm;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+
+.contact-spread__header h1 {
+  margin: 1mm 0 0;
+  font-size: 7mm;
+  line-height: 1;
+}
+
+.contact-phone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5mm;
+  min-height: 20mm;
+  color: #1d3d7a;
+  font-size: 5mm;
+  letter-spacing: 0.05em;
+}
+
+.contact-phone__icon,
+.contact-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 13mm;
+  height: 13mm;
+  border-radius: 50%;
+  background: #004a9f;
+  color: #fff;
+  font-size: 6mm;
+}
+
+.contact-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4mm;
+  padding: 5mm;
+  margin-bottom: 7mm;
+  border-radius: 4mm;
+  background: #eaf2ff;
+}
+
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5mm;
+  text-align: center;
+  font-size: 2.7mm;
+  color: #172b4d;
+}
+
+.contact-card strong {
+  font-size: 3mm;
+}
+
+.locations-panel {
+  padding: 5mm;
+  border-radius: 4mm;
+  background: #eef4ff;
+}
+
+.locations-panel h2 {
+  margin: 0 0 5mm;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #253d6b;
+  font-size: 4mm;
+}
+
+.locations-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10mm;
+}
+
+.location-block h3 {
+  margin: 0 0 2mm;
+  font-size: 3.6mm;
+  color: #253d6b;
+}
+
+.location-block p {
+  margin: 0 0 1.5mm;
+  font-size: 2.8mm;
+  line-height: 1.25;
+}
+
+.location-image-row,
+.map-row {
+  display: grid;
+  gap: 1mm;
+  margin-top: 5mm;
+}
+
+.location-image-row {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.map-row {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.location-image-placeholder,
+.map-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28mm;
+  background: #d7e2f2;
+  color: #5f6d80;
+  font-size: 3mm;
+  border: 0.25mm solid rgba(30, 60, 100, 0.18);
+}
+
+.map-placeholder {
+  min-height: 43mm;
+  background: #edf1f7;
+}
+
+/* Page 4: dynamic contents */
+.contents-page {
+  padding: 0 10mm 8mm;
+  background: #fff;
+}
+
+.contents-page__header {
+  height: 29mm;
+  margin: 0 -10mm 8mm;
+  padding: 6mm 12mm;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+  background:
+    linear-gradient(rgba(0, 42, 96, 0.92), rgba(0, 42, 96, 0.92)),
+    linear-gradient(90deg, #002a63, #064b8f);
+}
+
+.contents-page__section-label {
+  display: inline-block;
+  padding: 1mm 2mm;
+  margin-bottom: 1mm;
+  background: var(--vent-yellow);
+  color: #fff;
+  font-size: 2.8mm;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.contents-page__header h1 {
+  margin: 0;
+  font-size: 8mm;
+  line-height: 1;
+}
+
+.contents-page__icon {
+  font-size: 12mm;
+}
+
+.series-legend-panel,
+.contents-panel {
+  margin-bottom: 6mm;
+}
+
+.series-legend-panel h2,
+.contents-panel h2 {
+  margin: 0 0 4mm;
+  font-size: 5mm;
+  color: var(--accent);
+}
+
+.series-legend-panel__content,
+.contents-panel__content {
+  font-size: 3.5mm;
+  line-height: 1.35;
+}
+
+.series-legend {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(60mm, 1fr));
+  gap: 3mm 4mm;
+  padding: 0;
+  margin: 0;
+}
+
+.series-legend__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 3mm;
+  min-height: 11mm;
+}
+
+.series-legend__swatch {
+  width: 6mm;
+  height: 6mm;
+  border-radius: 50%;
+  flex: 0 0 auto;
+  margin-top: 0.8mm;
+  border: 0.25mm solid rgba(31, 41, 55, 0.18);
+}
+
+.product-type-contents {
+  display: flex;
+  flex-direction: column;
+  gap: 5mm;
+}
+
+.series-group {
+  border: 0.3mm solid var(--line);
+  border-left: 4.5mm solid var(--series-accent, var(--accent));
+  border-radius: 3.5mm;
+  padding: 4mm;
+  page-break-inside: avoid;
+  break-inside: avoid;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.series-group__header {
+  display: flex;
+  justify-content: space-between;
+  gap: 4mm;
+  align-items: baseline;
+  margin-bottom: 3.5mm;
+}
+
+.series-group__title {
+  margin: 0;
+  font-size: 5mm;
+}
+
+.series-group__meta {
+  font-size: 3.2mm;
+  color: var(--muted);
+}
+
+.series-group__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(35mm, 1fr));
+  gap: 3mm;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8mm;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.product-card img,
+.product-card__image,
+.product-card__placeholder {
+  width: 100%;
+  height: 28mm;
+  object-fit: contain;
+  border: 0.25mm solid rgba(82, 96, 116, 0.24);
+  border-radius: 2.2mm;
+  background: rgba(255, 255, 255, 0.96);
+  padding: 2mm;
+}
+
+.product-card__placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 3.2mm;
+}
+
+.product-card__name {
+  font-size: 3.4mm;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* === GRAPESJS MANAGED CSS START === */
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+:root {
+  --page-bg: #eef2f7;
+  --ink: #1f2937;
+  --muted: #526074;
+  --panel: rgba(255, 255, 255, 0.9);
+  --line: rgba(82, 96, 116, 0.22);
+  --accent: #21406f;
+  --vent-red: #cc1024;
+  --vent-dark: #050608;
+  --vent-blue: #003b78;
+  --vent-yellow: #f6c400;
+}
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  color: var(--ink);
+  font-family: Arial, Helvetica, sans-serif;
+}
+.catalogue-document {
+  width: 100%;
+}
+.pdf-page {
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  margin-top: 0px;
+  margin-right: auto;
+  margin-bottom: 0px;
+  margin-left: auto;
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(255, 255, 255);
+  break-after: page;
+}
+.pdf-page--portrait {
+  width: 210mm;
+  min-height: 297mm;
+}
+.pdf-page--landscape {
+  width: 297mm;
+  min-height: 210mm;
+}
+.pdf-page-break {
+  height: 0px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  color: transparent;
+  break-after: page;
+}
+.cover-page {
+  background-image:
+    radial-gradient(
+      circle at 48% 38%,
+      rgba(255, 255, 255, 0.16) 0px,
+      rgba(255, 255, 255, 0.16) 0.4mm,
+      transparent 0.6mm
+    ),
+    radial-gradient(
+      circle at 50% 39%,
+      transparent 0px,
+      transparent 27mm,
+      rgba(255, 255, 255, 0.12) 27.2mm,
+      rgba(255, 255, 255, 0.12) 27.6mm,
+      transparent 27.8mm
+    ),
+    radial-gradient(
+      circle at 50% 39%,
+      transparent 0px,
+      transparent 45mm,
+      rgba(255, 255, 255, 0.1) 45.2mm,
+      rgba(255, 255, 255, 0.1) 45.6mm,
+      transparent 45.8mm
+    ),
+    linear-gradient(
+      rgb(0, 0, 0) 0%,
+      rgb(8, 9, 13) 76%,
+      rgb(182, 14, 32) 76%,
+      rgb(224, 37, 50) 100%
+    );
+  background-position-x: initial, initial, initial, initial;
+  background-position-y: initial, initial, initial, initial;
+  background-size: initial, initial, initial, initial;
+  background-repeat: initial, initial, initial, initial;
+  background-attachment: initial, initial, initial, initial;
+  background-origin: initial, initial, initial, initial;
+  background-clip: initial, initial, initial, initial;
+  background-color: initial;
+  color: rgb(255, 255, 255);
+  padding-top: 15mm;
+  padding-right: 10mm;
+  padding-bottom: 0px;
+  padding-left: 10mm;
+}
+.cover-page__artwork {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.3;
+}
+.cover-page__nz {
+  position: absolute;
+  top: 15mm;
+  right: 20mm;
+  z-index: 2;
+  font-size: 3.1mm;
+  line-height: 1.25;
+  padding-left: 2mm;
+}
+.cover-page__brand-block {
+  position: absolute;
+  z-index: 2;
+  left: 19mm;
+  top: 105mm;
+}
+.cover-page__brand {
+  font-size: 14mm;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 0.9;
+}
+.cover-page__tagline {
+  margin-top: 2mm;
+  font-size: 3mm;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.cover-page__catalogue-block {
+  position: absolute;
+  left: 10mm;
+  bottom: 39mm;
+  z-index: 2;
+  padding-top: 4mm;
+}
+.cover-page__label {
+  font-size: 4.2mm;
+  font-weight: 800;
+  line-height: 1.1;
+}
+.cover-page__years {
+  margin-top: 2mm;
+  font-size: 2.8mm;
+  color: rgb(255, 79, 92);
+  font-weight: 700;
+}
+.cover-page__feature-strip {
+  position: absolute;
+  left: 42mm;
+  right: 8mm;
+  bottom: 35mm;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  row-gap: 2mm;
+  column-gap: 2mm;
+}
+.cover-feature {
+  text-align: center;
+  font-size: 1.95mm;
+  line-height: 1.15;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.cover-feature__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 15mm;
+  height: 15mm;
+  margin-top: 0px;
+  margin-right: auto;
+  margin-bottom: 1.8mm;
+  margin-left: auto;
+  border-top-width: 0.5mm;
+  border-right-width: 0.5mm;
+  border-bottom-width: 0.5mm;
+  border-left-width: 0.5mm;
+  border-top-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-top-color: rgba(210, 20, 34, 0.9);
+  border-right-color: rgba(210, 20, 34, 0.9);
+  border-bottom-color: rgba(210, 20, 34, 0.9);
+  border-left-color: rgba(210, 20, 34, 0.9);
+  border-image-source: initial;
+  border-image-slice: initial;
+  border-image-width: initial;
+  border-image-outset: initial;
+  border-image-repeat: initial;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+  border-bottom-left-radius: 50%;
+  background-image: radial-gradient(
+    circle,
+    rgb(40, 48, 58) 0%,
+    rgb(16, 19, 24) 70%
+  );
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: initial;
+  font-size: 5mm;
+}
+.cover-page__footer {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 2;
+  height: 15mm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  row-gap: 14mm;
+  column-gap: 14mm;
+  color: rgb(255, 255, 255);
+  font-size: 3mm;
+  font-weight: 700;
+}
+.company-image-page {
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(11, 58, 115);
+}
+.company-image-page__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 297mm;
+  object-fit: cover;
+}
+.contact-page {
+  padding-top: 0px;
+  padding-right: 14mm;
+  padding-bottom: 12mm;
+  padding-left: 14mm;
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(255, 255, 255);
+}
+.contact-page__header {
+  height: 38mm;
+  margin-top: 0px;
+  margin-right: -14mm;
+  margin-bottom: 10mm;
+  margin-left: -14mm;
+  padding-top: 9mm;
+  padding-right: 14mm;
+  padding-bottom: 9mm;
+  padding-left: 14mm;
+  color: rgb(255, 255, 255);
+  background-image:
+    linear-gradient(rgba(0, 41, 92, 0.92), rgba(0, 41, 92, 0.92)),
+    linear-gradient(90deg, rgb(0, 42, 99), rgb(7, 73, 137));
+  background-position-x: initial, initial;
+  background-position-y: initial, initial;
+  background-size: initial, initial;
+  background-repeat: initial, initial;
+  background-attachment: initial, initial;
+  background-origin: initial, initial;
+  background-clip: initial, initial;
+  background-color: initial;
+}
+.contact-page__logo {
+  font-size: 4mm;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+.contact-page__header h1 {
+  margin-top: 2mm;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  font-size: 8mm;
+  line-height: 1;
+}
+.contact-spread__header h1 {
+  margin-top: 1mm;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  font-size: 7mm;
+  line-height: 1;
+}
+.contact-phone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  row-gap: 5mm;
+  column-gap: 5mm;
+  min-height: 20mm;
+  color: rgb(29, 61, 122);
+  font-size: 5mm;
+  letter-spacing: 0.05em;
+}
+.contact-phone__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 13mm;
+  height: 13mm;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+  border-bottom-left-radius: 50%;
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(0, 74, 159);
+  color: rgb(255, 255, 255);
+  font-size: 6mm;
+}
+.contact-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 13mm;
+  height: 13mm;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+  border-bottom-left-radius: 50%;
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(0, 74, 159);
+  color: rgb(255, 255, 255);
+  font-size: 6mm;
+}
+.contact-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 4mm;
+  column-gap: 4mm;
+  padding-top: 5mm;
+  padding-right: 5mm;
+  padding-bottom: 5mm;
+  padding-left: 5mm;
+  margin-bottom: 7mm;
+  border-top-left-radius: 4mm;
+  border-top-right-radius: 4mm;
+  border-bottom-right-radius: 4mm;
+  border-bottom-left-radius: 4mm;
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(234, 242, 255);
+}
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 1.5mm;
+  column-gap: 1.5mm;
+  text-align: center;
+  font-size: 2.7mm;
+  color: rgb(23, 43, 77);
+}
+.contact-card strong {
+  font-size: 3mm;
+}
+.locations-panel {
+  padding-top: 5mm;
+  padding-right: 5mm;
+  padding-bottom: 5mm;
+  padding-left: 5mm;
+  border-top-left-radius: 4mm;
+  border-top-right-radius: 4mm;
+  border-bottom-right-radius: 4mm;
+  border-bottom-left-radius: 4mm;
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(238, 244, 255);
+}
+.locations-panel h2 {
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 5mm;
+  margin-left: 0px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgb(37, 61, 107);
+  font-size: 4mm;
+}
+.locations-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 10mm;
+  column-gap: 10mm;
+}
+.location-block h3 {
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 2mm;
+  margin-left: 0px;
+  font-size: 3.6mm;
+  color: rgb(37, 61, 107);
+}
+.location-block p {
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 1.5mm;
+  margin-left: 0px;
+  font-size: 2.8mm;
+  line-height: 1.25;
+}
+.location-image-row {
+  display: grid;
+  row-gap: 1mm;
+  column-gap: 1mm;
+  margin-top: 5mm;
+}
+.map-row {
+  display: grid;
+  row-gap: 1mm;
+  column-gap: 1mm;
+  margin-top: 5mm;
+}
+.location-image-row {
+  grid-template-columns: repeat(3, 1fr);
+}
+.map-row {
+  grid-template-columns: repeat(2, 1fr);
+}
+.location-image-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28mm;
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(215, 226, 242);
+  color: rgb(95, 109, 128);
+  font-size: 3mm;
+  border-top-width: 0.25mm;
+  border-right-width: 0.25mm;
+  border-bottom-width: 0.25mm;
+  border-left-width: 0.25mm;
+  border-top-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-top-color: rgba(30, 60, 100, 0.18);
+  border-right-color: rgba(30, 60, 100, 0.18);
+  border-bottom-color: rgba(30, 60, 100, 0.18);
+  border-left-color: rgba(30, 60, 100, 0.18);
+  border-image-source: initial;
+  border-image-slice: initial;
+  border-image-width: initial;
+  border-image-outset: initial;
+  border-image-repeat: initial;
+}
+.map-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28mm;
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(215, 226, 242);
+  color: rgb(95, 109, 128);
+  font-size: 3mm;
+  border-top-width: 0.25mm;
+  border-right-width: 0.25mm;
+  border-bottom-width: 0.25mm;
+  border-left-width: 0.25mm;
+  border-top-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-top-color: rgba(30, 60, 100, 0.18);
+  border-right-color: rgba(30, 60, 100, 0.18);
+  border-bottom-color: rgba(30, 60, 100, 0.18);
+  border-left-color: rgba(30, 60, 100, 0.18);
+  border-image-source: initial;
+  border-image-slice: initial;
+  border-image-width: initial;
+  border-image-outset: initial;
+  border-image-repeat: initial;
+}
+.map-placeholder {
+  min-height: 43mm;
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(237, 241, 247);
+}
+.contents-page {
+  padding-top: 0px;
+  padding-right: 10mm;
+  padding-bottom: 8mm;
+  padding-left: 10mm;
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(255, 255, 255);
+}
+.contents-page__header {
+  height: 29mm;
+  margin-top: 0px;
+  margin-right: -10mm;
+  margin-bottom: 8mm;
+  margin-left: -10mm;
+  padding-top: 6mm;
+  padding-right: 12mm;
+  padding-bottom: 6mm;
+  padding-left: 12mm;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: rgb(255, 255, 255);
+  background-image:
+    linear-gradient(rgba(0, 42, 96, 0.92), rgba(0, 42, 96, 0.92)),
+    linear-gradient(90deg, rgb(0, 42, 99), rgb(6, 75, 143));
+  background-position-x: initial, initial;
+  background-position-y: initial, initial;
+  background-size: initial, initial;
+  background-repeat: initial, initial;
+  background-attachment: initial, initial;
+  background-origin: initial, initial;
+  background-clip: initial, initial;
+  background-color: initial;
+}
+.contents-page__section-label {
+  display: inline-block;
+  padding-top: 1mm;
+  padding-right: 2mm;
+  padding-bottom: 1mm;
+  padding-left: 2mm;
+  margin-bottom: 1mm;
+  color: rgb(255, 255, 255);
+  font-size: 2.8mm;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.contents-page__header h1 {
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  font-size: 8mm;
+  line-height: 1;
+}
+.contents-page__icon {
+  font-size: 12mm;
+}
+.series-legend-panel {
+  margin-bottom: 6mm;
+}
+.contents-panel {
+  margin-bottom: 6mm;
+}
+.series-legend-panel h2,
+.contents-panel h2 {
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 4mm;
+  margin-left: 0px;
+  font-size: 5mm;
+  color: var(--accent);
+}
+.series-legend-panel__content {
+  font-size: 3.5mm;
+  line-height: 1.35;
+}
+.contents-panel__content {
+  font-size: 3.5mm;
+  line-height: 1.35;
+}
+.product-type-contents {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5mm;
+  column-gap: 5mm;
+}
+.product-card__placeholder,
+.product-card img {
+  width: 100%;
+  height: 28mm;
+  object-fit: contain;
+  border-top-width: 0.25mm;
+  border-right-width: 0.25mm;
+  border-bottom-width: 0.25mm;
+  border-left-width: 0.25mm;
+  border-top-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-top-color: rgba(82, 96, 116, 0.24);
+  border-right-color: rgba(82, 96, 116, 0.24);
+  border-bottom-color: rgba(82, 96, 116, 0.24);
+  border-left-color: rgba(82, 96, 116, 0.24);
+  border-image-source: initial;
+  border-image-slice: initial;
+  border-image-width: initial;
+  border-image-outset: initial;
+  border-image-repeat: initial;
+  border-top-left-radius: 2.2mm;
+  border-top-right-radius: 2.2mm;
+  border-bottom-right-radius: 2.2mm;
+  border-bottom-left-radius: 2.2mm;
+  background-image: initial;
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgba(255, 255, 255, 0.96);
+  padding-top: 2mm;
+  padding-right: 2mm;
+  padding-bottom: 2mm;
+  padding-left: 2mm;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+}
+@page {
+  size: a4;
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+}
+/* === GRAPESJS MANAGED CSS END === */
+
 /* === GRAPESJS MANAGED CSS END === */

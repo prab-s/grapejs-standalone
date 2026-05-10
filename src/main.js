@@ -5,6 +5,10 @@ import presetWebpage from 'grapesjs-preset-webpage';
 import blocksBasic from 'grapesjs-blocks-basic';
 import pluginExport from 'grapesjs-plugin-export';
 
+import prettier from 'prettier/standalone';
+import parserHtml from 'prettier/plugins/html';
+import parserPostcss from 'prettier/plugins/postcss';
+
 import './style.css';
 
 let editor = null;
@@ -667,7 +671,6 @@ async function loadTemplate() {
 
   editor.Commands.add('save-files', {
     async run(editor) {
-
       let html = editor.getHtml();
 
       html = html.replace(
@@ -692,6 +695,27 @@ async function loadTemplate() {
 
       const grapesCss = editor.getCss();
 
+      const finalCss =
+        currentOriginalCss
+          .replace(
+            /\/\* === GRAPESJS MANAGED CSS START === \*\/[\s\S]*?\/\* === GRAPESJS MANAGED CSS END === \*\//g,
+            ''
+          )
+          .trim()
+        + '\n\n/* === GRAPESJS MANAGED CSS START === */\n'
+        + grapesCss
+        + '\n/* === GRAPESJS MANAGED CSS END === */\n';
+
+      const formattedHtml = await prettier.format(html, {
+        parser: 'html',
+        plugins: [parserHtml],
+      });
+
+      const formattedCss = await prettier.format(finalCss, {
+        parser: 'css',
+        plugins: [parserPostcss],
+      });
+
       const res = await fetch('/save-template', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -699,13 +723,8 @@ async function loadTemplate() {
           folder,
           htmlFile,
           cssFile,
-          html,
-          css: currentOriginalCss
-            .replace(/\/\* === GRAPESJS MANAGED CSS START === \*\/[\s\S]*?\/\* === GRAPESJS MANAGED CSS END === \*\//g, '')
-            .trim()
-            + '\n\n/* === GRAPESJS MANAGED CSS START === */\n'
-            + grapesCss
-            + '\n/* === GRAPESJS MANAGED CSS END === */\n',
+          html: formattedHtml,
+          css: formattedCss,
           originalCss: currentOriginalCss,
         }),
       });

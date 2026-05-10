@@ -15,6 +15,7 @@
     "grapesjs": "^0.22.15",
     "grapesjs-blocks-basic": "^1.0.2",
     "grapesjs-plugin-export": "^1.0.12",
-    "grapesjs-preset-webpage": "^1.0.3"
+    "grapesjs-preset-webpage": "^1.0.3",
+    "prettier": "^3.8.3"
   }
 }
