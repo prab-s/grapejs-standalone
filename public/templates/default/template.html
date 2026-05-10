@@ -1,0 +1,134 @@
+<body id="inev" class="product-type-template">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>{{product_type.label}} | Product Type PDF</title>
+  <link rel="stylesheet" href="./template.css"/>
+
+  <main class="catalogue-document">
+    <!-- Page 1: editable cover, with optional artwork image support -->
+    <section class="pdf-page pdf-page--portrait cover-page" id="cover-page">
+      <img class="cover-page__artwork" src="./cover.jpg" alt="Vent-Tech catalogue cover artwork"/>
+
+      <div class="cover-page__nz">100% NZ Owned<br/>&amp; Operated</div>
+
+      <div class="cover-page__brand-block">
+        <div class="cover-page__brand">VENT-TECH</div>
+        <div class="cover-page__tagline">VENTILATION TECHNOLOGY &amp; PRODUCTS</div>
+      </div>
+
+      <div class="cover-page__catalogue-block">
+        <div class="cover-page__label">PRODUCT<br/>CATALOGUE</div>
+        <div class="cover-page__years">2024 / 2025</div>
+      </div>
+
+      <div class="cover-page__feature-strip">
+        <div class="cover-feature"><span class="cover-feature__icon">✓</span><span>Quality<br/>Products</span></div>
+        <div class="cover-feature"><span class="cover-feature__icon">◆</span><span>Innovative<br/>Solutions</span></div>
+        <div class="cover-feature"><span class="cover-feature__icon">●</span><span>Superior<br/>Performance</span></div>
+        <div class="cover-feature"><span class="cover-feature__icon">✦</span><span>Reliable<br/>Systems</span></div>
+        <div class="cover-feature"><span class="cover-feature__icon">▬</span><span>Built for<br/>NZ Conditions</span></div>
+        <div class="cover-feature"><span class="cover-feature__icon">▰</span><span>Supporting<br/>New Zealand</span></div>
+      </div>
+
+      <footer class="cover-page__footer">
+        <span>www.venttech.co.nz</span>
+        <span>04 595 1403</span>
+      </footer>
+    </section>
+
+    <div class="pdf-page-break">PDF PAGE BREAK</div>
+
+    <!-- Page 2: editable company/contact information spread -->
+    <section class="pdf-page pdf-page--landscape contact-spread" id="contact-page">
+      <div class="contact-spread__image-panel">
+        <img class="contact-spread__bg" src="./company-info.jpg" alt="Company information background"/>
+      </div>
+
+      <div class="contact-spread__content-panel">
+        <header class="contact-spread__header">
+          <div class="contact-spread__logo">VENT-TECH</div>
+          <h1>Contact Details</h1>
+        </header>
+
+        <div class="contact-phone">
+          <div class="contact-phone__icon">☎</div>
+          <div><strong>Phone:</strong> 04 595 1403</div>
+        </div>
+
+        <div class="contact-cards">
+          <div class="contact-card">
+            <div class="contact-card__icon">◎</div>
+            <strong>Website</strong>
+            <span>www.venttech.co.nz</span>
+          </div>
+          <div class="contact-card">
+            <div class="contact-card__icon">✉</div>
+            <strong>Orders and enquiries</strong>
+            <span>sales@venttech.co.nz</span>
+          </div>
+          <div class="contact-card">
+            <div class="contact-card__icon">☏</div>
+            <strong>General office</strong>
+            <span>04 595 1403</span>
+          </div>
+        </div>
+
+        <section class="locations-panel">
+          <h2>Locations</h2>
+          <div class="locations-grid">
+            <div class="location-block">
+              <h3>Lower Hutt</h3>
+              <p><strong>Head Office</strong></p>
+              <p>Vent-Tech<br/>Wellington<br/>New Zealand</p>
+              <p>04 595 1403</p>
+            </div>
+            <div class="location-block">
+              <h3>New Zealand</h3>
+              <p><strong>Sales &amp; Support</strong></p>
+              <p>Nationwide product supply<br/>Technical support<br/>Ventilation solutions</p>
+              <p>sales@venttech.co.nz</p>
+            </div>
+          </div>
+
+          <div class="location-image-row">
+            <div class="location-image-placeholder">Image / showroom placeholder</div>
+            <div class="location-image-placeholder">Image / warehouse placeholder</div>
+            <div class="location-image-placeholder">Image / product placeholder</div>
+          </div>
+
+          <div class="map-row">
+            <div class="map-placeholder">Map placeholder</div>
+            <div class="map-placeholder">Map placeholder</div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <div class="pdf-page-break">PDF PAGE BREAK</div>
+
+    <!-- Page 3: dynamic visual contents / product type landing page -->
+    <section class="pdf-page pdf-page--landscape contents-page" id="contents-page">
+      <header class="contents-page__header">
+        <div>
+          <div class="contents-page__section-label">Product Type</div>
+          <h1>{{product_type.label}}</h1>
+        </div>
+        <div class="contents-page__icon">✺</div>
+      </header>
+
+      <section class="series-legend-panel">
+        <h2>Series Legend</h2>
+        <div class="series-legend-panel__content">
+          {{product_type.series_legend_html}}
+        </div>
+      </section>
+
+      <section class="contents-panel">
+        <h2>{{product_type.label}}</h2>
+        <div class="contents-panel__content product-type-contents">
+          {{product_type.contents_html}}
+        </div>
+      </section>
+    </section>
+  </main>
+</body>

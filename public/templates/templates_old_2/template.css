@@ -1,0 +1,225 @@
+:root {
+  --page-bg: #eef2f7;
+  --ink: #1f2937;
+  --muted: #526074;
+  --panel: rgba(255, 255, 255, 0.86);
+  --line: rgba(82, 96, 116, 0.22);
+  --accent: #21406f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--page-bg);
+  color: var(--ink);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body.product-type-template {
+  background: var(--page-bg);
+}
+
+.page {
+  width: 297mm;
+  min-height: 210mm;
+  padding: 12mm 14mm 10mm;
+  margin: 0 auto;
+}
+
+.cover-panel {
+  padding: 8mm 8mm 6mm;
+  border: 0.35mm solid var(--line);
+  border-radius: 4mm;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), var(--panel));
+  margin-bottom: 6mm;
+}
+
+.cover-panel__eyebrow {
+  font-size: 3mm;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 3mm;
+}
+
+.cover-panel__title {
+  margin: 0 0 3mm;
+  font-size: 12mm;
+  line-height: 1.05;
+  color: var(--accent);
+}
+
+.cover-panel__summary {
+  margin: 0;
+  font-size: 4mm;
+  line-height: 1.45;
+  color: var(--muted);
+  max-width: 170mm;
+}
+
+.company-panel,
+.series-legend-panel,
+.series-panel,
+.contents-panel {
+  padding: 3mm 2mm;
+  border: 0.3mm solid var(--line);
+  border-radius: 3mm;
+  background: var(--panel);
+  margin-bottom: 2mm;
+}
+
+.company-panel h2,
+.series-legend-panel h2,
+.series-panel h2,
+.contents-panel h2 {
+  margin: 0 0 3mm;
+  font-size: 4.6mm;
+  color: var(--accent);
+}
+
+.company-panel__content,
+.series-legend-panel__content,
+.series-panel__content,
+.contents-panel__content {
+  font-size: 3.8mm;
+  line-height: 1.45;
+}
+
+.series-legend {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(84mm, 1fr));
+  gap: 3mm 4mm;
+  padding: 0;
+  margin: 0;
+}
+
+.series-legend__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 3mm;
+  min-height: 12mm;
+}
+
+.series-legend__swatch {
+  width: 6mm;
+  height: 6mm;
+  border-radius: 50%;
+  flex: 0 0 auto;
+  margin-top: 0.8mm;
+  border: 0.25mm solid rgba(31, 41, 55, 0.18);
+}
+
+.series-legend__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4mm;
+}
+
+.series-legend__name {
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.series-legend__meta {
+  color: var(--muted);
+  font-size: 3.2mm;
+}
+
+.product-type-contents {
+  display: flex;
+  flex-direction: column;
+  gap: 5mm;
+}
+
+.series-group {
+  border: 0.3mm solid var(--line);
+  border-left: 4.5mm solid var(--series-accent, var(--accent));
+  border-radius: 3.5mm;
+  padding: 4mm;
+  page-break-inside: avoid;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.series-group__header {
+  display: flex;
+  justify-content: space-between;
+  gap: 4mm;
+  align-items: baseline;
+  margin-bottom: 3.5mm;
+}
+
+.series-group__title {
+  margin: 0;
+  font-size: 5mm;
+}
+
+.series-group__meta {
+  font-size: 3.2mm;
+  color: var(--muted);
+}
+
+.series-group__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(35mm, 1fr));
+  gap: 3mm;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8mm;
+}
+
+.product-card img {
+  width: 100%;
+  height: 28mm;
+  object-fit: contain;
+  border: 0.25mm solid rgba(82, 96, 116, 0.24);
+  border-radius: 2.2mm;
+  background: rgba(255, 255, 255, 0.96);
+  padding: 2mm;
+}
+
+.product-card__image,
+.product-card__placeholder {
+  width: 100%;
+  height: 28mm;
+  border: 0.25mm solid rgba(82, 96, 116, 0.24);
+  border-radius: 2.2mm;
+  background: rgba(255, 255, 255, 0.96);
+}
+
+.product-card__image {
+  object-fit: contain;
+  padding: 2mm;
+}
+
+.product-card__placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 3.2mm;
+}
+
+.product-card__name {
+  font-size: 3.4mm;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* === GRAPESJS MANAGED CSS START === */
+* { box-sizing: border-box; } body {margin: 0;}.gjs-row{display:table;padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;width:100%;}.gjs-cell{width:8%;display:table-cell;height:75px;}.page{background-color:#edf1f6;}#iezi6{padding:10px;}#i67gp{color:black;}@media (max-width: 768px){.gjs-cell{width:100%;display:block;}}
+/* === GRAPESJS MANAGED CSS END === */

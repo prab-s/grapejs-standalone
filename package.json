@@ -1,0 +1,20 @@
+{
+  "name": "grapesjs-standalone",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^8.0.10"
+  },
+  "dependencies": {
+    "grapesjs": "^0.22.15",
+    "grapesjs-blocks-basic": "^1.0.2",
+    "grapesjs-plugin-export": "^1.0.12",
+    "grapesjs-preset-webpage": "^1.0.3"
+  }
+}

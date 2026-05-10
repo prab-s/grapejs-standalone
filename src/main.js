@@ -1,0 +1,461 @@
+import grapesjs from 'grapesjs';
+import 'grapesjs/dist/css/grapes.min.css';
+
+import presetWebpage from 'grapesjs-preset-webpage';
+import blocksBasic from 'grapesjs-blocks-basic';
+import pluginExport from 'grapesjs-plugin-export';
+
+import './style.css';
+
+let editor = null;
+let currentOriginalCss = '';
+
+function getTemplatePaths() {
+  const folder = document
+    .getElementById('template-folder')
+    .value
+    .replace(/^\/+|\/+$/g, '');
+
+  const htmlFile = document.getElementById('template-html-file').value.trim();
+  const cssFile = document.getElementById('template-css-file').value.trim();
+
+  return {
+    folder,
+    htmlFile,
+    cssFile,
+    htmlPath: `/${folder}/${htmlFile}`,
+    cssPath: `/${folder}/${cssFile}`,
+  };
+}
+
+async function loadTemplate() {
+  const {
+    folder,
+    htmlFile,
+    cssFile,
+    htmlPath,
+    cssPath,
+  } = getTemplatePaths();
+
+  const [htmlRes, cssRes] = await Promise.all([
+    fetch(htmlPath),
+    fetch(cssPath),
+  ]);
+
+  if (!htmlRes.ok) {
+    alert(`Could not load HTML file: ${htmlPath}`);
+    return;
+  }
+
+  if (!cssRes.ok) {
+    alert(`Could not load CSS file: ${cssPath}`);
+    return;
+  }
+
+  const html = await htmlRes.text();
+  currentOriginalCss = await cssRes.text();
+
+  if (editor) {
+    editor.destroy();
+    editor = null;
+  }
+
+  editor = grapesjs.init({
+    container: '#gjs',
+    height: '100%',
+    width: '100%',
+    fromElement: false,
+    storageManager: false,
+    components: html,
+
+    canvas: {
+      styles: [cssPath],
+    },
+
+    plugins: [
+      presetWebpage,
+      blocksBasic,
+      pluginExport,
+    ],
+  });
+
+  editor.BlockManager.add('pdf-page-break', {
+    label: 'Page Break',
+    category: 'PDF',
+    content: '<div class="pdf-page-break">PDF PAGE BREAK</div>',
+  });
+
+  editor.BlockManager.add('pdf-no-break', {
+    label: 'No Page Split',
+    category: 'PDF',
+    content: '<div class="pdf-avoid-break">Content here</div>',
+  });
+
+  function clampNumber(value, min, max, fallback) {
+    const num = Number(value);
+    if (Number.isNaN(num)) return fallback;
+    return Math.max(min, Math.min(max, num));
+  }
+
+  function hexToRgba(hex, opacityPercent) {
+    const cleanHex = hex.replace('#', '');
+    const expandedHex = cleanHex.length === 3
+      ? cleanHex.split('').map((c) => c + c).join('')
+      : cleanHex;
+
+    const alpha = clampNumber(opacityPercent, 0, 100, 100) / 100;
+    const bigint = parseInt(expandedHex, 16);
+
+    const r = (bigint >> 16) & 255;
+    const g = (bigint >> 8) & 255;
+    const b = bigint & 255;
+
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  }
+
+  function rgbToHex(r, g, b) {
+    return `#${[r, g, b]
+      .map((value) => Number(value).toString(16).padStart(2, '0'))
+      .join('')}`;
+  }
+
+  function getGradientValueFromInputs() {
+    const type = document.querySelector('[data-gradient-field="type"]')?.value || 'linear';
+    const angle = document.querySelector('[data-gradient-field="angle"]')?.value || '135';
+    const direction = document.querySelector('[data-gradient-field="direction"]')?.value || '';
+    const radialShape = document.querySelector('[data-gradient-field="radialShape"]')?.value || 'circle';
+    const radialPosition = document.querySelector('[data-gradient-field="radialPosition"]')?.value || 'center';
+
+    const colour1Hex = document.querySelector('[data-gradient-field="colour1"]')?.value || '#ffffff';
+    const opacity1 = document.querySelector('[data-gradient-field="opacity1"]')?.value || '100';
+    const stop1 = document.querySelector('[data-gradient-field="stop1"]')?.value || '0';
+
+    const colour2Hex = document.querySelector('[data-gradient-field="colour2"]')?.value || '#000000';
+    const opacity2 = document.querySelector('[data-gradient-field="opacity2"]')?.value || '100';
+    const stop2 = document.querySelector('[data-gradient-field="stop2"]')?.value || '100';
+
+    const colour1 = hexToRgba(colour1Hex, opacity1);
+    const colour2 = hexToRgba(colour2Hex, opacity2);
+
+    if (type === 'radial') {
+      return `radial-gradient(${radialShape} at ${radialPosition}, ${colour1} ${stop1}%, ${colour2} ${stop2}%)`;
+    }
+
+    const linearDirection = direction || `${angle}deg`;
+    return `linear-gradient(${linearDirection}, ${colour1} ${stop1}%, ${colour2} ${stop2}%)`;
+  }
+
+  function updateGradientReadout() {
+    const output = document.querySelector('[data-gradient-output]');
+    if (output) {
+      output.value = getGradientValueFromInputs();
+    }
+  }
+
+  function applyGradientToSelected() {
+    const selected = editor.getSelected();
+
+    if (!selected) {
+      alert('Select an element first.');
+      return;
+    }
+
+    const gradient = getGradientValueFromInputs();
+
+    selected.addStyle({
+      'background-image': gradient,
+    });
+
+    const cssInput = document.querySelector('[data-gradient-css]');
+    if (cssInput) {
+      cssInput.value = gradient;
+    }
+
+    editor.StyleManager.render();
+    editor.refresh();
+    updateGradientReadout();
+  }
+
+  function setGradientField(name, value) {
+    const field = document.querySelector(`[data-gradient-field="${name}"]`);
+    if (field && value !== undefined && value !== null) {
+      field.value = value;
+    }
+  }
+
+  function parseColourStop(colourValue, stopValue, colourField, opacityField, stopField) {
+    const rgbaMatch = colourValue.match(
+      /rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)(?:\s*,\s*([0-9.]+))?\s*\)/
+    );
+
+    if (rgbaMatch) {
+      const r = rgbaMatch[1];
+      const g = rgbaMatch[2];
+      const b = rgbaMatch[3];
+      const alpha = rgbaMatch[4] !== undefined ? Number(rgbaMatch[4]) : 1;
+
+      setGradientField(colourField, rgbToHex(r, g, b));
+      setGradientField(opacityField, Math.round(alpha * 100));
+      setGradientField(stopField, stopValue);
+      return;
+    }
+
+    const hexMatch = colourValue.match(/#[0-9a-fA-F]{3,8}/);
+
+    if (hexMatch) {
+      setGradientField(colourField, hexMatch[0]);
+      setGradientField(opacityField, 100);
+      setGradientField(stopField, stopValue);
+    }
+  }
+
+  function syncInputsFromGradient(gradient) {
+    if (!gradient) return;
+
+    const colourStopPattern = '(rgba?\\([^)]*\\)|#[0-9a-fA-F]{3,8})\\s+(\\d+)%';
+
+    const linearRegex = new RegExp(
+      `linear-gradient\\((.*?),\\s*${colourStopPattern}\\s*,\\s*${colourStopPattern}\\s*\\)`
+    );
+
+    const linearMatch = gradient.match(linearRegex);
+
+    if (linearMatch) {
+      const directionOrAngle = linearMatch[1];
+
+      setGradientField('type', 'linear');
+
+      if (directionOrAngle.endsWith('deg')) {
+        setGradientField('direction', '');
+        setGradientField('angle', directionOrAngle.replace('deg', ''));
+      } else {
+        setGradientField('direction', directionOrAngle);
+      }
+
+      parseColourStop(linearMatch[2], linearMatch[3], 'colour1', 'opacity1', 'stop1');
+      parseColourStop(linearMatch[4], linearMatch[5], 'colour2', 'opacity2', 'stop2');
+      return;
+    }
+
+    const radialRegex = new RegExp(
+      `radial-gradient\\((circle|ellipse)\\s+at\\s+(.*?),\\s*${colourStopPattern}\\s*,\\s*${colourStopPattern}\\s*\\)`
+    );
+
+    const radialMatch = gradient.match(radialRegex);
+
+    if (radialMatch) {
+      setGradientField('type', 'radial');
+      setGradientField('radialShape', radialMatch[1]);
+      setGradientField('radialPosition', radialMatch[2]);
+
+      parseColourStop(radialMatch[3], radialMatch[4], 'colour1', 'opacity1', 'stop1');
+      parseColourStop(radialMatch[5], radialMatch[6], 'colour2', 'opacity2', 'stop2');
+    }
+  }
+
+  function syncGradientBuilderFromSelected() {
+    const selected = editor.getSelected();
+    if (!selected) return;
+
+    const style = selected.getStyle();
+
+    let backgroundImage = style['background-image'] || '';
+
+    if (!backgroundImage) {
+      const selectedEl = selected.getEl();
+
+      if (selectedEl) {
+        backgroundImage = editor.Canvas.getWindow()
+          .getComputedStyle(selectedEl)
+          .getPropertyValue('background-image');
+      }
+
+      if (backgroundImage === 'none') {
+        backgroundImage = '';
+      }
+    }
+
+    const cssInput = document.querySelector('[data-gradient-css]');
+    const output = document.querySelector('[data-gradient-output]');
+
+    if (backgroundImage) {
+      syncInputsFromGradient(backgroundImage);
+    }
+
+    if (cssInput) {
+      cssInput.value = backgroundImage;
+    }
+
+    if (output) {
+      output.value = backgroundImage || getGradientValueFromInputs();
+    }
+  }
+
+  function findAdvancedGradientSector() {
+    return [...document.querySelectorAll('.gjs-sm-sector')]
+      .find((el) => el.textContent.includes('Advanced Gradient'))
+      ?.querySelector('.gjs-sm-properties');
+  }
+
+  function injectGradientBuilder() {
+    const sector = findAdvancedGradientSector();
+
+    if (!sector) return;
+
+    if (sector.querySelector('[data-gradient-builder]')) {
+      syncGradientBuilderFromSelected();
+      return;
+    }
+
+    const builder = document.createElement('div');
+    builder.setAttribute('data-gradient-builder', 'true');
+    builder.style.padding = '8px';
+    builder.style.width = '100%';
+    builder.style.boxSizing = 'border-box';
+
+    builder.innerHTML = `
+      <label>Type</label>
+      <select data-gradient-field="type" style="width:100%; margin-bottom:6px;">
+        <option value="linear">Linear</option>
+        <option value="radial">Radial</option>
+      </select>
+
+      <label>Linear angle</label>
+      <input data-gradient-field="angle" type="number" min="0" max="360" value="135" style="width:100%; margin-bottom:6px;">
+
+      <label>Linear direction</label>
+      <select data-gradient-field="direction" style="width:100%; margin-bottom:6px;">
+        <option value="">Use angle</option>
+        <option value="to right">Left → Right</option>
+        <option value="to left">Right → Left</option>
+        <option value="to bottom">Top → Bottom</option>
+        <option value="to top">Bottom → Top</option>
+        <option value="to bottom right">Top Left → Bottom Right</option>
+        <option value="to bottom left">Top Right → Bottom Left</option>
+      </select>
+
+      <label>Radial shape</label>
+      <select data-gradient-field="radialShape" style="width:100%; margin-bottom:6px;">
+        <option value="circle">Circle</option>
+        <option value="ellipse">Ellipse</option>
+      </select>
+
+      <label>Radial position</label>
+      <select data-gradient-field="radialPosition" style="width:100%; margin-bottom:6px;">
+        <option value="center">Centre</option>
+        <option value="top">Top</option>
+        <option value="bottom">Bottom</option>
+        <option value="left">Left</option>
+        <option value="right">Right</option>
+        <option value="top left">Top left</option>
+        <option value="top right">Top right</option>
+        <option value="bottom left">Bottom left</option>
+        <option value="bottom right">Bottom right</option>
+      </select>
+
+      <label>Colour 1</label>
+      <input data-gradient-field="colour1" type="color" value="#ffffff" style="width:100%; margin-bottom:6px;">
+
+      <label>Colour 1 opacity (%)</label>
+      <input data-gradient-field="opacity1" type="number" min="0" max="100" value="100" style="width:100%; margin-bottom:6px;">
+
+      <label>Stop 1 (%)</label>
+      <input data-gradient-field="stop1" type="number" min="0" max="100" value="0" style="width:100%; margin-bottom:6px;">
+
+      <label>Colour 2</label>
+      <input data-gradient-field="colour2" type="color" value="#000000" style="width:100%; margin-bottom:6px;">
+
+      <label>Colour 2 opacity (%)</label>
+      <input data-gradient-field="opacity2" type="number" min="0" max="100" value="100" style="width:100%; margin-bottom:6px;">
+
+      <label>Stop 2 (%)</label>
+      <input data-gradient-field="stop2" type="number" min="0" max="100" value="100" style="width:100%; margin-bottom:6px;">
+
+      <label>Generated CSS</label>
+      <textarea data-gradient-output readonly style="width:100%; min-height:70px; margin-bottom:8px;"></textarea>
+
+      <label>Applied background-image</label>
+      <textarea data-gradient-css readonly style="width:100%; min-height:70px; margin-bottom:8px;"></textarea>
+
+      <button type="button" data-gradient-apply style="width:100%; padding:6px; cursor:pointer;">
+        Apply Gradient
+      </button>
+    `;
+
+    sector.appendChild(builder);
+
+    builder.querySelectorAll('input, select').forEach((input) => {
+      input.addEventListener('input', updateGradientReadout);
+      input.addEventListener('change', updateGradientReadout);
+    });
+
+    builder.querySelector('[data-gradient-apply]').addEventListener('click', applyGradientToSelected);
+
+    updateGradientReadout();
+    syncGradientBuilderFromSelected();
+  }
+
+  editor.StyleManager.addSector('advanced-gradient', {
+    name: 'Advanced Gradient',
+    open: true,
+    properties: [
+      {
+        name: 'Background image',
+        property: 'background-image',
+        type: 'text',
+        full: true,
+        defaults: '',
+      },
+    ],
+  });
+
+  editor.on('style:target', () => {
+    setTimeout(injectGradientBuilder, 100);
+  });
+
+  editor.on('component:selected', () => {
+    setTimeout(injectGradientBuilder, 100);
+  });
+
+  editor.on('load', () => {
+    setTimeout(injectGradientBuilder, 300);
+  });
+
+  editor.Panels.addButton('options', {
+    id: 'save-files',
+    className: 'fa fa-save',
+    command: 'save-files',
+    attributes: { title: 'Overwrite selected HTML and CSS files' },
+  });
+
+  editor.Commands.add('save-files', {
+    async run(editor) {
+      const html = editor.getHtml();
+      const grapesCss = editor.getCss();
+
+      const res = await fetch('/save-template', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          folder,
+          htmlFile,
+          cssFile,
+          html,
+          css: grapesCss,
+          originalCss: currentOriginalCss,
+        }),
+      });
+
+      if (!res.ok) {
+        alert('Save failed');
+        return;
+      }
+
+      alert(`Saved ${folder}/${htmlFile} and ${folder}/${cssFile}`);
+    },
+  });
+}
+
+document.getElementById('load-template').addEventListener('click', loadTemplate);
+
+loadTemplate();
